@@ -4,8 +4,10 @@ app.controller('TodoCtrl', ['$scope', 'ds', function TodoCtrl($scope, ds) {
     markAll: false,
     todosList: []
   }
+  $scope.ready = false
 
   record.whenReady((record) => {
+    $scope.ready = true
     var init = record.get()
     if (!angular.equals(init, {})) {
       angular.copy(init, $scope.todos)

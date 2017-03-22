@@ -10,7 +10,10 @@
   </head>
   <body ng-app="Todo">
     <div id="todoapp" ng-controller="TodoCtrl">
-      <div class="container text-center">
+      <div class="container text-center" ng-hide="ready">
+        Connecting to DeepstreamHub...
+      </div>
+      <div class="container text-center" ng-show="ready">
         <header>
             <h1>Deepstream + Angular Todo</h1>
             <input id="new-todo" type="text" ng-model="todoText" placeholder="What needs to be done?" ng-keyup="addTodo($event)"/>
