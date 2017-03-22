@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo deepstream</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body ng-app="Todo">
+    <div id="todoapp" ng-controller="TodoCtrl">
+      <div class="container text-center">
+        <header>
+            <h1>Deepstream + Angular Todo</h1>
+            <input id="new-todo" type="text" ng-model="todoText" placeholder="What needs to be done?" ng-keyup="addTodo($event)"/>
+        </header>
+
+        <section id="main" class="text-left">
+            <div ng-show="todos.todosList.length">
+              <input id="toggle-all" type="checkbox" ng-model="todos.markAll"
+                ng-click="toggleMarkAll()"/>
+              <label for="toggle-all">Mark all as complete</label>
+            </div>
+
+            <ul id="todo-list">
+              <li ng-repeat="todo in todos.todosList">
+                <div class="view">
+                  <input type="checkbox" ng-model="todo.done" ng-click="markOne(todo)"/>
+                  <span class="done-{{todo.done}}" >{{todo.text}}</span>
+                </div>
+              </li>
+            </ul>
+        </section>
+
+        <footer>
+            <div class="todo-count" ng-show="todos.todosList.length">{{remaining()}} of {{todos.todosList.length}} remaining</div>
+              <a id="clear-completed" ng-click="clear()" ng-show="hasDone()">
+                  Clear <span >{{(todos.todosList.length - remaining())}} {{itemText()}}</span>.
+              </a>
+        </footer>
+      </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- deepstream client library -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/deepstream.io-client-js/2.1.2/deepstream.min.js"></script>
+    <!-- controllers, modules, services -->
+    <script src="js/app.js"></script>
+    <script src="js/todoCtrl.js"></script>
+    <script src="js/services.js"></script>
+</body>
+</html>
